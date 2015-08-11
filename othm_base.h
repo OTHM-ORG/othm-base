@@ -49,4 +49,6 @@ struct othm_pair othm_pair_new(void *first, void *second);
 struct othm_funct *othm_funct_new(void (*function)(void),
 				  char *name);
 
+char *othm_load_file(char *file_name);
+
 #endif
