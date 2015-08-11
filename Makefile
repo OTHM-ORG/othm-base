@@ -2,7 +2,7 @@ all: libothm_base.so
 
 libothm_base.so: othm_base.o
 	gcc -shared -o libothm_base.so othm_base.o
-othm_base.o:
+othm_base.o: othm_base.c othm_base.h
 	gcc -c -Wall -Werror -fPIC othm_base.c -o othm_base.o
 
 .PHONY : clean install uninstall test

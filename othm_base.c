@@ -24,10 +24,11 @@ struct othm_pair othm_pair_new(void *first, void *second)
 	return pair;
 }
 
-struct othm_funct *othm_funct_new(void (*function)(void))
+struct othm_funct *othm_funct_new(void (*function)(void), char *name)
 {
 	struct othm_funct *new_funct = malloc(sizeof(struct othm_funct));;
 
 	new_funct->function = function;
+	new_funct->name = name;
 	return new_funct;
 }

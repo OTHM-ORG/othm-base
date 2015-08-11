@@ -16,6 +16,7 @@ struct othm_funct {
 	   since it's type will be set at some other
 	   time so I made it a useless function. */
 	void (*function)(void);
+	char *name;
 };
 /* These are "low level" parts of othm and thus should
    Not have a type since it would take up extra data */
@@ -32,7 +33,9 @@ struct othm_pair {
 };
 
 #define OTHMREQUEST(REQUEST) ((struct othm_request *) (REQUEST))
-#define OTHM_FUNCT(ANYFUNCTION) (othm_funct_new((void (*) (void))(ANYFUNCTION)))
+#define OTHM_FUNCT(ANYFUNCTION, NAME) (othm_funct_new	\
+				       ((void (*) (void))(ANYFUNCTION), \
+					NAME))
 
 struct othm_request *othm_request_new(int (*check_key)(void *storage, void *data),
 				      void *key_type, int data_size, void *data);
@@ -43,6 +46,7 @@ struct othm_pair othm_pair_new(void *first, void *second);
    If you are doing this it should be to pass a function around,
    be very careful though because it can be nearly impossible to
    debug if you mess something up!! */
-struct othm_funct *othm_funct_new(void (*function)(void));
+struct othm_funct *othm_funct_new(void (*function)(void),
+				  char *name);
 
 #endif

@@ -8,7 +8,7 @@ void print_input(char *input)
 
 int main(void)
 {
-	struct othm_funct *printer = OTHM_FUNCT(print_input);
+	struct othm_funct *printer = OTHM_FUNCT(print_input, "print_input");
 	((void (*) (char *)) printer->function)
 		("You built othm-base!\n");
 	return 0;
