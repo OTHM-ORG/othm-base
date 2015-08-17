@@ -2,6 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+const struct othm_pair OTHM_NULL_PAIR = {
+	.first  = NULL,
+	.second = NULL
+};
+
 /* Creates a new request */
 struct othm_request *othm_request_new(int (*check_key)(void *storage, void *data),
 				      void *key_type, int data_size, void *data)
