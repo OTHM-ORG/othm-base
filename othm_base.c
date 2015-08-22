@@ -2,10 +2,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+const struct othm_typed OTHM_NULL_TYPED = {
+	.type = NULL
+};
+
 const struct othm_pair OTHM_NULL_PAIR = {
 	.first  = NULL,
 	.second = NULL
 };
+
+
+struct othm_typed othm_typed_new(void *type)
+{
+	struct othm_typed new_type;
+	new_type.type = type;
+
+	return new_type;
+}
 
 /* Creates a new request */
 struct othm_request *othm_request_new(int (*check_key)(void *storage, void *data),

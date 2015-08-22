@@ -39,7 +39,10 @@ struct othm_pair {
 				       ((void (*) (void))(ANYFUNCTION), \
 					NAME))
 
+extern const struct othm_typed OTHM_NULL_TYPED;
 extern const struct othm_pair OTHM_NULL_PAIR;
+
+struct othm_typed othm_typed_new(void *type);
 
 struct othm_request *othm_request_new(int (*check_key)(void *storage, void *data),
 				      void *key_type, int data_size, void *data);
