@@ -34,6 +34,63 @@ struct othm_pair {
 	void *second;
 };
 
+struct othm_triple {
+	void *first;
+	void *second;
+	void *third;
+};
+
+struct othm_quadruple {
+	void *first;
+	void *second;
+	void *third;
+	void *fourth;
+};
+
+struct othm_quintuple {
+	void *first;
+	void *second;
+	void *third;
+	void *fourth;
+	void *fifth;
+};
+
+struct othm_sextuple {
+	void *first;
+	void *second;
+	void *third;
+	void *fourth;
+	void *fifth;
+	void *sixth;
+};
+
+struct othm_septuple {
+	void *first;
+	void *second;
+	void *third;
+	void *fourth;
+	void *fifth;
+	void *sixth;
+	void *seventh;
+};
+
+struct othm_octuple {
+	void *first;
+	void *second;
+	void *third;
+	void *fourth;
+	void *fifth;
+	void *sixth;
+	void *seventh;
+	void *eighth;
+};
+
+
+struct othm_list {
+	void *here;
+	struct othm_list *next;
+};
+
 #define OTHMREQUEST(REQUEST) ((struct othm_request *) (REQUEST))
 #define OTHM_FUNCT(ANYFUNCTION, NAME) (othm_funct_new	\
 				       ((void (*) (void))(ANYFUNCTION), \
