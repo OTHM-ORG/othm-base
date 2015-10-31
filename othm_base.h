@@ -1,6 +1,8 @@
 #ifndef OTHM_BASE_H
 #define OTHM_BASE_H
 
+#include "othm_cpp.h"
+
 #define OTHM_TYPE(TYPED) ((struct othm_typed *) TYPED)
 
 struct othm_typed {

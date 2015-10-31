@@ -10,10 +10,12 @@ clean :
 	-rm  othm_base.o libothm_base.so test
 install :
 	cp othm_base.h /usr/include/
+	cp othm_cpp.h /usr/include/
 	cp libothm_base.so /usr/lib/
 	ldconfig
 uninstall :
 	-rm  /usr/include/othm_base.h
+	-rm  /usr/include/othm_cpp.h
 	-rm  /usr/lib/libothm_base.so
 	ldconfig
 test :
