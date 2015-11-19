@@ -93,6 +93,12 @@ struct othm_list {
 	struct othm_list *next;
 };
 
+struct othm_stack {
+	struct othm_list *(*cell_gen)(void);
+	void (*cell_popper)(struct othm_list *cell);
+	struct othm_list *top;
+};
+
 #define OTHMREQUEST(REQUEST) ((struct othm_request *) (REQUEST))
 #define OTHM_FUNCT(ANYFUNCTION, NAME) (othm_funct_new	\
 				       ((void (*) (void))(ANYFUNCTION), \
@@ -107,6 +113,14 @@ struct othm_request *othm_request_new(int (*check_key)(void *storage, void *data
 				      void *key_type, int data_size, void *data);
 
 struct othm_pair othm_pair_new(void *first, void *second);
+
+struct othm_stack *othm_stack_new(struct othm_stack *(*gen)(void),
+				  struct othm_list *(*cell_gen)(void));
+
+void othm_stack_push(struct othm_stack *stack,
+		     void *thing);
+
+void *othm_stack_pop(struct othm_stack *stack);
 
 /*                       NOTE:IMPORTANT!
    If you are doing this it should be to pass a function around,
