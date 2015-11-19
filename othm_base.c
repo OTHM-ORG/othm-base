@@ -190,13 +190,11 @@ struct othm_list *othm_list_cdr(struct othm_list *list)
 	return list->next;
 }
 
-struct othm_stack *othm_stack_new(struct othm_stack *(*gen)(void),
-				  struct othm_list *(*cell_gen)(void))
+struct othm_stack *othm_stack_new(struct othm_stack *(*gen)(void))
 {
 	struct othm_stack *stack;
 
 	stack = gen();
-	stack->cell_gen = cell_gen;
 	stack->top = NULL;
 
 	return stack;
@@ -207,7 +205,7 @@ void othm_stack_push(struct othm_stack *stack,
 {
 	struct othm_list *list;
 
-	list = stack->cell_gen();
+	list = malloc(sizeof(struct othm_list));;
 	list->here = thing;
 	list->next = stack->top;
 	stack->top = list;
@@ -221,7 +219,8 @@ void *othm_stack_pop(struct othm_stack *stack)
 	list = stack->top;
 	thing = list->here;
 	stack->top = list->next;
-	stack->cell_popper(list);
+
+	free(list);
 
 	return thing;
 }

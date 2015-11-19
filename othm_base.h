@@ -94,8 +94,6 @@ struct othm_list {
 };
 
 struct othm_stack {
-	struct othm_list *(*cell_gen)(void);
-	void (*cell_popper)(struct othm_list *cell);
 	struct othm_list *top;
 };
 
@@ -114,11 +112,9 @@ struct othm_request *othm_request_new(int (*check_key)(void *storage, void *data
 
 struct othm_pair othm_pair_new(void *first, void *second);
 
-struct othm_stack *othm_stack_new(struct othm_stack *(*gen)(void),
-				  struct othm_list *(*cell_gen)(void));
+struct othm_stack *othm_stack_new(struct othm_stack *(*gen)(void));
 
-void othm_stack_push(struct othm_stack *stack,
-		     void *thing);
+void othm_stack_push(struct othm_stack *stack, void *thing);
 
 void *othm_stack_pop(struct othm_stack *stack);
 
