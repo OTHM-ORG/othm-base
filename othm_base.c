@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 const struct othm_typed OTHM_NULL_TYPED = {
 	.type = NULL
 };
@@ -168,6 +169,38 @@ struct othm_list *othm_list_new(void *here)
 	new_list->next = NULL;
 
 	return new_list;
+}
+
+struct othm_list *othm_list_direct(struct othm_list *(*list_gen)(void),
+				   void *first, ...)
+{
+	va_list argp;
+	void *arg;
+	struct othm_list *head;
+	struct othm_list *tail;
+
+	if (first == NULL)
+		return NULL;
+
+	arg = first;
+	head = list_gen();
+	tail = head;
+	va_start(argp, first);
+	do {
+		tail->here = arg;
+	} while ((arg = va_arg(argp, void *))
+		 ? (tail->next = list_gen(),
+		    tail = tail->next, 1)
+		 : 0);
+
+	/* This while is used to only allocate another part of the list
+	   if the list is not null! it does this using the comma operator
+	   and the conditional operator */
+
+	tail->next = NULL;
+	va_end(argp);
+
+	return head;
 }
 
 void othm_list_append(struct othm_list *list,

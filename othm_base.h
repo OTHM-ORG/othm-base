@@ -2,6 +2,8 @@
 #define OTHM_BASE_H
 
 #include "othm_cpp.h"
+#include <stdarg.h>
+
 
 #define OTHM_TYPE(TYPED) ((struct othm_typed *) TYPED)
 
@@ -109,6 +111,9 @@ struct othm_typed othm_typed_new(void *type);
 
 struct othm_request *othm_request_new(int (*check_key)(void *storage, void *data),
 				      void *key_type, int data_size, void *data);
+
+struct othm_list *othm_list_direct(struct othm_list *(*list_gen)(void),
+				   void *first, ...);
 
 struct othm_pair othm_pair_new(void *first, void *second);
 
