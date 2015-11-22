@@ -203,6 +203,40 @@ struct othm_list *othm_list_direct(struct othm_list *(*list_gen)(void),
 	return head;
 }
 
+struct othm_dlist *othm_dlist_direct(struct othm_dlist *(*dlist_gen)(void),
+				     void *first, ...)
+{
+	va_list argp;
+	void *arg;
+	struct othm_dlist *head;
+	struct othm_dlist *tail;
+
+	if (first == NULL)
+		return NULL;
+
+	arg = first;
+	head = dlist_gen();
+	head->prev = NULL;
+	tail = head;
+	va_start(argp, first);
+	do {
+		tail->here = arg;
+	} while ((arg = va_arg(argp, void *))
+		 ? (tail->next = dlist_gen(),
+		    tail->next->prev = tail,
+		    tail = tail->next, 1)
+		 : 0);
+
+	/* This while is used to only allocate another part of the list
+	   if the list is not null! it does this using the comma operator
+	   and the conditional operator */
+
+	tail->next = NULL;
+	va_end(argp);
+
+	return head;
+}
+
 void othm_list_append(struct othm_list *list,
 		      void *end)
 {

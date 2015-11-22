@@ -95,6 +95,12 @@ struct othm_list {
 	struct othm_list *next;
 };
 
+struct othm_dlist {
+	void *here;
+	struct othm_dlist *next;
+	struct othm_dlist *prev;
+};
+
 struct othm_stack {
 	struct othm_list *top;
 };
@@ -114,6 +120,9 @@ struct othm_request *othm_request_new(int (*check_key)(void *storage, void *data
 
 struct othm_list *othm_list_direct(struct othm_list *(*list_gen)(void),
 				   void *first, ...);
+
+struct othm_dlist *othm_dlist_direct(struct othm_dlist *(*dlist_gen)(void),
+				     void *first, ...);
 
 struct othm_pair othm_pair_new(void *first, void *second);
 
