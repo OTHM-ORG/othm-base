@@ -141,4 +141,6 @@ struct othm_funct *othm_funct_new(void (*function)(void),
 
 char *othm_load_file(char *file_name);
 
+struct othm_list *othm_list_new(void *here);
+
 #endif
